@@ -9,12 +9,13 @@ import lombok.Builder;
 @Builder
 public class StaffDTOBuilder {
 
-    public static StaffDetailsDTO fromEntity(Staff staff) {
+    public static StaffDetailsDTO buildStaffDetailsDto(Staff staff) {
         if (staff == null) {
             return null;
         }
 
-        return StaffDetailsDTO.builder()
+        return StaffDetailsDTO
+                .builder()
                 .staffId(String.valueOf(staff.getStaffId()))
                 .firstName(staff.getFirstName())
                 .lastName(staff.getLastName())
@@ -28,16 +29,17 @@ public class StaffDTOBuilder {
                 .staffType(staff.getStaffType())
                 .isEmployeeActive(staff.isEmployeeActive())
                 .canLogin(staff.isCanLogin())
-                .staffAddressDto(toAddressDto(staff.getStaffAddress()))
+                .staffAddressDto(buildAddressDto(staff.getStaffAddress()))
                 .build();
     }
 
-    private static StaffAddressDTO toAddressDto(StaffAddress staffAddress) {
+    private static StaffAddressDTO buildAddressDto(StaffAddress staffAddress) {
         if (staffAddress == null) {
             return null;
         }
 
-        return StaffAddressDTO.builder()
+        return StaffAddressDTO
+                .builder()
                 .landmark(staffAddress.getLandmark())
                 .city(staffAddress.getCity())
                 .state(staffAddress.getState())
